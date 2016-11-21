@@ -1,4 +1,4 @@
-# Facebook LeadAds - Método paleativo para resgatar retorno do Form/App
+# Método paliativo para resgatar retorno do Form/App
 
 Depois de diversas tentativas de obter os leads via API do Face, me deparei com um erro que nem os caras do Face conseguiram me ajudar. Eu segui o tutorial exatamente como solicitado na documentação deles.
 
