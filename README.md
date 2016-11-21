@@ -2,7 +2,7 @@
 
 Depois de diversas tentativas de obter os leads via API do Face, me deparei com um erro que nem os caras do Face conseguiram me ajudar. Eu segui o tutorial exatamente como solicitado na documentação deles.
 
-Buscando outras formas de retornar os valores dos campos, encontrei uma solução paleativa fazendo a busca com cURL, requisitando o graph.facebook
+Buscando outras formas de retornar os valores dos campos, encontrei uma solução paliativa fazendo a busca com cURL, requisitando o graph.facebook
 
 Vamos lá !
 
@@ -32,7 +32,7 @@ $output = json_decode($response);
 ```
 
 #### Valor do OUTPUT ( retorno )
-> Para exibir o valor exatamente igual a seguir, insira o seguinte código
+> Para exibir o retorno, insira o seguinte código
 
 ```php
 echo '<pre>'; print_r($output); echo '</pre>';
