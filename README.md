@@ -77,10 +77,11 @@ Agora vamos guardar os valores que nos interessa em variáveis. ( Nome, Email e 
 
 >É necessário observar que o objeto contém arrays e para isso devemos percorrer dessa forma:
 
-`$output` = Objeto mãe
-`field_data[0]` = Acessando o índice 0 do array field_data sendo que [0] é um objeto
-`values[0]` = Acessando o índice 0 do array values sendo que nesse caso [0] é um array
-``
+```php
+$output //Objeto mãe
+field_data[0] //Acessando o índice 0 do array field_data sendo que [0] é um objeto
+values[0] //Acessando o índice 0 do array values sendo que nesse caso [0] é um array
+```
 
 As variáveis ficarão dessa forma
 
