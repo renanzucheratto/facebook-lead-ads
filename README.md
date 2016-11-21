@@ -1,31 +1,33 @@
-# facebook-lead-ads
+# Facebook LeadAds - Método paleativo para resgatar retorno do Form/App
 
-Depois de diversas tentativas de obter os leads via API do Face, me deparei com um erro que nem os caras do Face conseguiram me ajudar. Eu segui o tutorial deles exatamente como solicitado na documentação deles.
+Depois de diversas tentativas de obter os leads via API do Face, me deparei com um erro que nem os caras do Face conseguiram me ajudar. Eu segui o tutorial exatamente como solicitado na documentação deles.
 
-Buscando outras formas de retornar os retornar os valores dos campos, encontrei uma solução paleativa fazendo a busca com CURL, requisitando o graph.facebook.
+Buscando outras formas de retornar os valores dos campos, encontrei uma solução paleativa fazendo a busca com cURL, requisitando o graph.facebook
 
 Vamos lá !
 
 ### Configuração
 
 ```php
-//Essa primeira linha retorna em `string` todo o arquivo contido na URL setada | Analisa a string codificada JSON e converte em uma variável
+//Essa primeira linha retorna em `string` todo o arquivo contido na URL setada | Analisa a string codificada JSON e converte em uma variável PHP
 $inputurl = json_decode(file_get_contents('php://input'), true);
-//Percorre o json até chegar ao id do Lead
+//Percorre a variável até chegar ao id do Lead
 $leadgen_id = $inputurl["entry"][0]["changes"][0]["value"]["leadgen_id"];
+//O Token de acesso é obtido no app que você criou
+$token = '<TOKEN_DE_ACESSO>';
 
-//Inicia o cURL acessando uma URL | O Token de acesso é obtido no app que você criou
-$ch = curl_init('https://graph.facebook.com/'.$leadgen_id.'?access_token=<TOKEN_DE_ACESSO>');
+//Inicia o cURL acessando uma URL | 
+$ch = curl_init('https://graph.facebook.com/'.$leadgen_id.'?access_token='.$token);
 // Define a opção que diz que você quer receber o resultado encontrado
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 // Esta opção determina se curl verificará a autenticidade do certificado. Os valores podem ser TRUE ou FALSE e/ou 1 para TRUE e 0 para FALSE
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 // Verifica se o HOST e o SSL são verdadeiros ou se existem em comum
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-// Executa a consulta, conectando-se ao site e salvando o resultado na variável $response
+// Executa a consulta conectando-se ao site e salvando o resultado na variável $response
 $response = curl_exec($ch);
 
-//Convertendo valor em JSON para a variável $output em PHP
+//Convertendo valor em JSON para a variável $output
 $output = json_decode($response);
 ```
 
@@ -78,13 +80,12 @@ Agora vamos guardar os valores que nos interessa em variáveis. ( Nome, Email e 
 >É necessário observar que o objeto contém arrays e para isso devemos percorrer dessa forma:
 
 ```php
-$output //Objeto mãe
-field_data[0] //Acessando o índice 0 do array field_data sendo que [0] é um objeto
+$output-> //Objeto mãe
+field_data[0]-> //Acessando o índice 0 do array field_data sendo que [0] é um objeto
 values[0] //Acessando o índice 0 do array values sendo que nesse caso [0] é um array
 ```
 
-As variáveis ficarão dessa forma
-
+####As variáveis ficarão dessa forma
 
 ```php
 $nome 	= $output->field_data[0]->values[0];
